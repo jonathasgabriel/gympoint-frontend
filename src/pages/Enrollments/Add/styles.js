@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import Select from 'react-select';
-import DatePicker from 'react-datepicker';
+import AsyncSelect from 'react-select/async';
 
 export const Container = styled.div`
   max-width: 900px;
@@ -69,8 +69,6 @@ export const InfoWrapper = styled.div`
   }
 `;
 
-export const CustomDatePicker = styled(DatePicker)``;
-
 export const CustomSelect = styled(Select)`
   display: flex;
   flex: 1;
@@ -89,12 +87,20 @@ export const CustomSelect = styled(Select)`
     align-items: center;
     flex-wrap: wrap;
 
-    div {
-    }
-
     span {
       margin-bottom: 15px;
     }
+  }
+`;
+
+export const CustomAsyncSelect = styled(AsyncSelect)`
+  margin: 5px 40px;
+
+  > input {
+    border-radius: 4px;
+    border: solid 1px #dddddd;
+    height: 44px;
+    padding: 0 15px;
   }
 `;
 

@@ -48,7 +48,7 @@ export default function Plans() {
         </thead>
         <tbody>
           {plans.map(plan => (
-            <tr>
+            <tr key={String(plan.id)}>
               <td>
                 <span>{plan.title}</span>
               </td>

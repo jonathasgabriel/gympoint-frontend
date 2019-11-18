@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 import { Form, Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
+import { format, addMonths } from 'date-fns';
+import Async, { makeAsyncSelect } from 'react-select/async';
+import AsyncSelect from 'react-select/async';
 
+import DatePicker from 'react-datepicker';
 import SaveButton from '~/components/Buttons/SaveButton';
 import BackButton from '~/components/Buttons/BackButton';
 
@@ -16,7 +20,7 @@ import {
   Header,
   InfoWrapper,
   CustomSelect,
-  CustomDatePicker,
+  CustomAsyncSelect,
 } from './styles';
 
 const schema = Yup.object().shape({
@@ -32,7 +36,7 @@ export default function AddEnrollment(props) {
 
   const loadedOption = useMemo(() => {
     if (plan) {
-      const ret = planOptions.find(po => po.value === plan);
+      const ret = planOptions.find(po => po.value === plan.id);
 
       return ret;
     }
@@ -47,11 +51,19 @@ export default function AddEnrollment(props) {
       ]);
 
       const optionedPlans = loadedPlans.data.map(planOption => {
-        return { value: planOption.id, label: planOption.title };
+        return {
+          value: planOption.id,
+          label: planOption.title,
+          duration: planOption.duration,
+          totalPrice: planOption.price * planOption.duration,
+        };
       });
 
+      const selectedPlan = loadedPlans.data.find(
+        selectPlan => selectPlan.id === enrollment.data.plan.id
+      );
       setPlanOptions(optionedPlans);
-      setPlan(enrollment.data.plan.id);
+      setPlan(selectedPlan);
       setEditMode(true);
     }
 
@@ -59,7 +71,12 @@ export default function AddEnrollment(props) {
       const response = await api.get('/plans');
 
       const optionedPlans = response.data.map(planOption => {
-        return { value: planOption.id, label: planOption.title };
+        return {
+          value: planOption.id,
+          label: planOption.title,
+          duration: planOption.duration,
+          totalPrice: planOption.price * planOption.duration,
+        };
       });
 
       setPlanOptions(optionedPlans);
@@ -76,6 +93,7 @@ export default function AddEnrollment(props) {
   }, []);
 
   async function handleSubmit() {
+    console.tron.log('submitted');
     try {
       if (editMode) {
         const { id } = props.match.params;
@@ -88,9 +106,12 @@ export default function AddEnrollment(props) {
 
         toast.success('Enrollment updated successfully');
       } else {
+        console.tron.log(student.id);
+        console.tron.log(plan.value);
+        console.tron.log(startDate);
         await api.post('enrollments', {
           student_id: student.id,
-          plan_id: plan.id,
+          plan_id: plan.value,
           start_date: startDate,
         });
 
@@ -105,6 +126,27 @@ export default function AddEnrollment(props) {
     }
   }
 
+  const endDate = useMemo(() => {
+    if (plan && startDate) {
+      return format(addMonths(startDate, plan.duration), 'MM/dd/yyyy');
+    }
+    return '';
+  }, [plan, startDate]);
+
+  const totalPrice = useMemo(() => {
+    if (plan) {
+      return plan.totalPrice;
+    }
+    return '';
+  }, [plan]);
+
+  async function loadStudents(value) {
+    const res = await api.get(`students?name=${value}`);
+    return new Promise(resolve => {
+      resolve(res.data);
+    });
+  }
+
   return (
     <Container>
       <Header>
@@ -115,9 +157,15 @@ export default function AddEnrollment(props) {
         </div>
       </Header>
 
-      <Form id="enrollment-form" schema={schema} onSubmit={handleSubmit}>
+      <Form id="enrollment-form" onSubmit={handleSubmit}>
         <strong>Student</strong>
-        <Input name="student" placeholder="Full name" />
+        <CustomAsyncSelect
+          cacheOptions
+          defaultOptions
+          loadOptions={e => loadStudents(e)}
+          value={student}
+          onChange={e => setStudent(e)}
+        />
         <InfoWrapper>
           <div>
             <strong>Plan</strong>
@@ -125,23 +173,23 @@ export default function AddEnrollment(props) {
               isSearchable={false}
               options={planOptions}
               value={loadedOption}
-              onChange={e => setPlan(e.value)}
+              onChange={e => setPlan(e)}
             />
           </div>
           <div>
             <strong>Start Date</strong>
-            <CustomDatePicker
+            <DatePicker
               selected={startDate}
               onChange={date => setStartDate(date)}
             />
           </div>
           <div>
             <strong>End Date</strong>
-            <Input disabled name="endDate" />
+            <Input disabled name="endDate" value={endDate} />
           </div>
           <div>
             <strong>Total Price</strong>
-            <Input disabled name="totalPrice" />
+            <Input disabled name="totalPrice" value={totalPrice} />
           </div>
         </InfoWrapper>
       </Form>

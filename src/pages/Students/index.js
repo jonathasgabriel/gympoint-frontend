@@ -60,7 +60,7 @@ export default function Students() {
         </thead>
         <tbody>
           {students.map(student => (
-            <tr>
+            <tr key={String(student.id)}>
               <td>
                 <span>{student.name}</span>
               </td>

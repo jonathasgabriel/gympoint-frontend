@@ -66,7 +66,7 @@ export default function Enrollments() {
         </thead>
         <tbody>
           {enrollments.map(enrollment => (
-            <tr>
+            <tr key={String(enrollment.id)}>
               <td>
                 <span>{enrollment.student}</span>
               </td>
