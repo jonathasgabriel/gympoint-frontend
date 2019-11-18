@@ -8,6 +8,7 @@ import AddStudent from '../pages/Students/Add';
 import Plans from '../pages/Plans';
 import AddPlan from '../pages/Plans/Add';
 import Enrollments from '../pages/Enrollments';
+import HelpOrders from '../pages/HelpOrders';
 import AddEnrollment from '../pages/Enrollments/Add';
 
 export default function Routes() {
@@ -23,6 +24,7 @@ export default function Routes() {
       <Route exact path="/enrollments" isPrivate component={Enrollments} />
       <Route path="/enrollments/add" isPrivate component={AddEnrollment} />
       <Route path="/enrollments/edit/:id" isPrivate component={AddEnrollment} />
+      <Route exact path="/helporders" isPrivate component={HelpOrders} />
       <Route path="/" component={() => <h1>404 - Page not found</h1>} />
     </Switch>
   );

@@ -23,10 +23,6 @@ import {
   CustomAsyncSelect,
 } from './styles';
 
-const schema = Yup.object().shape({
-  startDate: Yup.string().required('Start date is required'),
-});
-
 export default function AddEnrollment(props) {
   const [student, setStudent] = useState();
   const [planOptions, setPlanOptions] = useState([]);

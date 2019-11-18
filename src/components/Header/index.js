@@ -22,7 +22,7 @@ export default function Header() {
           <Link to="/students"> Students</Link>
           <Link to="/plans"> Plans</Link>
           <Link to="/enrollments"> Enrollments</Link>
-          <Link to="/students"> Help Orders</Link>
+          <Link to="/helporders"> Help Orders</Link>
         </nav>
 
         <div>
