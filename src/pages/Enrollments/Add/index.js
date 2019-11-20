@@ -1,11 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import * as Yup from 'yup';
 import { Form, Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
-import { format, addMonths } from 'date-fns';
-import Async, { makeAsyncSelect } from 'react-select/async';
-import AsyncSelect from 'react-select/async';
+import { format, addMonths, parseISO } from 'date-fns';
 
 import SaveButton from '~/components/Buttons/SaveButton';
 import BackButton from '~/components/Buttons/BackButton';
@@ -24,6 +21,7 @@ import {
 } from './styles';
 
 export default function AddEnrollment(props) {
+  const [totalPrice, setTotalPrice] = useState();
   const [student, setStudent] = useState();
   const [planOptions, setPlanOptions] = useState([]);
   const [plan, setPlan] = useState();
@@ -60,6 +58,13 @@ export default function AddEnrollment(props) {
       );
       setPlanOptions(optionedPlans);
       setPlan(selectedPlan);
+      setTotalPrice(selectedPlan.price * selectedPlan.duration);
+      setStudent({
+        value: enrollment.data.student.id,
+        label: enrollment.data.student.name,
+      });
+      setStartDate(parseISO(enrollment.data.start_date));
+
       setEditMode(true);
     }
 
@@ -89,7 +94,6 @@ export default function AddEnrollment(props) {
   }, []);
 
   async function handleSubmit() {
-    console.tron.log('submitted');
     try {
       if (editMode) {
         const { id } = props.match.params;
@@ -102,9 +106,6 @@ export default function AddEnrollment(props) {
 
         toast.success('Enrollment updated successfully');
       } else {
-        console.tron.log(student.id);
-        console.tron.log(plan.value);
-        console.tron.log(startDate);
         await api.post('enrollments', {
           student_id: student.id,
           plan_id: plan.value,
@@ -129,12 +130,10 @@ export default function AddEnrollment(props) {
     return '';
   }, [plan, startDate]);
 
-  const totalPrice = useMemo(() => {
-    if (plan) {
-      return plan.totalPrice;
-    }
-    return '';
-  }, [plan]);
+  function handlePlanChange(e) {
+    setPlan(e);
+    setTotalPrice(e ? e.totalPrice : '');
+  }
 
   async function loadStudents(value) {
     const res = await api.get(`students?name=${value}`);
@@ -151,11 +150,6 @@ export default function AddEnrollment(props) {
     });
   }
 
-  function handleAsyncSelectChange(e) {
-    setStudent(e);
-    console.tron.log(e);
-  }
-
   return (
     <Container>
       <Header>
@@ -170,19 +164,21 @@ export default function AddEnrollment(props) {
         <strong>Student</strong>
         <CustomAsyncSelect
           cacheOptions
+          isClearable
           defaultOptions
           loadOptions={e => loadStudents(e)}
           value={student}
-          onChange={e => handleAsyncSelectChange(e)}
+          onChange={e => setStudent(e)}
         />
         <InfoWrapper>
           <div>
             <strong>Plan</strong>
             <CustomSelect
               isSearchable={false}
+              isClearable
               options={planOptions}
               value={loadedOption}
-              onChange={e => setPlan(e)}
+              onChange={e => handlePlanChange(e)}
             />
           </div>
           <div>

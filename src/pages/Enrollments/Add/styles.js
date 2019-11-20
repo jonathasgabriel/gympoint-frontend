@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-
+import 'react-datepicker/dist/react-datepicker.css';
 import Select from 'react-select';
 import AsyncSelect from 'react-select/async';
 import DatePicker from 'react-datepicker';
@@ -104,7 +104,6 @@ export const CustomAsyncSelect = styled(AsyncSelect)`
 
   div {
     align-items: center;
-    height: 45px;
 
     div {
       margin-left: 3px;
