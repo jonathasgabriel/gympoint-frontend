@@ -7,7 +7,6 @@ import { format, addMonths } from 'date-fns';
 import Async, { makeAsyncSelect } from 'react-select/async';
 import AsyncSelect from 'react-select/async';
 
-import DatePicker from 'react-datepicker';
 import SaveButton from '~/components/Buttons/SaveButton';
 import BackButton from '~/components/Buttons/BackButton';
 
@@ -21,6 +20,7 @@ import {
   InfoWrapper,
   CustomSelect,
   CustomAsyncSelect,
+  CustomDatePicker,
 } from './styles';
 
 export default function AddEnrollment(props) {
@@ -139,8 +139,21 @@ export default function AddEnrollment(props) {
   async function loadStudents(value) {
     const res = await api.get(`students?name=${value}`);
     return new Promise(resolve => {
-      resolve(res.data);
+      resolve(
+        res.data.map(st => {
+          return {
+            value: st.id,
+            label: st.name,
+            ...st,
+          };
+        })
+      );
     });
+  }
+
+  function handleAsyncSelectChange(e) {
+    setStudent(e);
+    console.tron.log(e);
   }
 
   return (
@@ -160,7 +173,7 @@ export default function AddEnrollment(props) {
           defaultOptions
           loadOptions={e => loadStudents(e)}
           value={student}
-          onChange={e => setStudent(e)}
+          onChange={e => handleAsyncSelectChange(e)}
         />
         <InfoWrapper>
           <div>
@@ -174,7 +187,7 @@ export default function AddEnrollment(props) {
           </div>
           <div>
             <strong>Start Date</strong>
-            <DatePicker
+            <CustomDatePicker
               selected={startDate}
               onChange={date => setStartDate(date)}
             />

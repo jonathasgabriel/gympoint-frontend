@@ -41,7 +41,7 @@ export default function Enrollments() {
     await api.delete(`enrollments/${id}`);
 
     setEnrollments(enrollments.filter(enrollment => enrollment.id !== id));
-    toast.success('Enrollments deleted successfully');
+    toast.success('Enrollment deleted successfully');
   }
 
   return (
