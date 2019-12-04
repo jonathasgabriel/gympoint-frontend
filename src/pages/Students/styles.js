@@ -17,19 +17,6 @@ export const Header = styled.div`
     display: flex;
     justify-content: space-between;
 
-    button {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 142px;
-      height: 36px;
-      border-radius: 4px;
-      background-color: #ee4d64;
-      color: #fff;
-      font-family: Roboto;
-      font-size: 14px;
-    }
-
     input {
       margin-left: 15px;
       width: 237px;
@@ -91,4 +78,31 @@ export const CrudButton = styled.button`
   margin: 5px;
   background: none;
   border: none;
+`;
+
+export const StandardButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 142px;
+  height: 36px;
+  border-radius: 4px;
+  background-color: #ee4d64;
+  color: #fff;
+  font-family: Roboto;
+  font-size: 14px;
+`;
+
+export const SearchButton = styled.button`
+  position: absolute;
+  margin-left: 20px;
+  margin-top: 8px;
+  border-color: #ffff;
+`;
+
+export const SearchBarDiv = styled.div`
+  position: relative;
+  > input {
+    width: 100%;
+  }
 `;

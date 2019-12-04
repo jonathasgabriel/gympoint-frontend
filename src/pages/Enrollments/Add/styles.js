@@ -3,6 +3,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Select from 'react-select';
 import AsyncSelect from 'react-select/async';
 import DatePicker from 'react-datepicker';
+import { Input } from '@rocketseat/unform';
 
 export const Container = styled.div`
   max-width: 900px;
@@ -21,7 +22,7 @@ export const Container = styled.div`
       margin: 5px 40px;
       border-radius: 4px;
       border: solid 1px #dddddd;
-      height: 44px;
+      height: 45px;
       padding: 0 15px;
     }
 
@@ -45,8 +46,8 @@ export const InfoWrapper = styled.div`
   flex-wrap: wrap;
 
   input {
-    min-width: 150px;
-    max-width: 270px;
+    min-width: 120px;
+    max-width: 250px;
     height: 45px;
     border-radius: 4px;
     border: solid 1px #dddddd;
@@ -149,4 +150,15 @@ export const Header = styled.div`
     font-weight: bold;
     color: #444444;
   }
+`;
+
+export const CustomInput = styled(Input)`
+  max-width: 270px;
+  height: 45px;
+  margin-left: 2px;
+  border-radius: 4px;
+  border: solid 1px #ddd;
+  background: #dee0e3;
+  padding: 0 15px;
+  margin-top: 5px;
 `;

@@ -18,6 +18,7 @@ import {
   CustomSelect,
   CustomAsyncSelect,
   CustomDatePicker,
+  CustomInput,
 } from './styles';
 
 export default function AddEnrollment(props) {
@@ -190,11 +191,11 @@ export default function AddEnrollment(props) {
           </div>
           <div>
             <strong>End Date</strong>
-            <Input disabled name="endDate" value={endDate} />
+            <CustomInput disabled name="endDate" value={endDate} />
           </div>
           <div>
             <strong>Total Price</strong>
-            <Input disabled name="totalPrice" value={totalPrice} />
+            <CustomInput disabled name="totalPrice" value={totalPrice} />
           </div>
         </InfoWrapper>
       </Form>

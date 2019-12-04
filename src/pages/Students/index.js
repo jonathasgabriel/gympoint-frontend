@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { MdAdd } from 'react-icons/md';
+import { MdAdd, MdSearch } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import history from '~/services/history';
 
-import { Container, Header, StudentTable, CrudButton } from './styles';
+import {
+  Container,
+  Header,
+  StudentTable,
+  CrudButton,
+  SearchButton,
+  StandardButton,
+  SearchBarDiv,
+} from './styles';
 
 import api from '~/services/api';
 
@@ -11,19 +19,18 @@ export default function Students() {
   const [students, setStudents] = useState([]);
   const [searchStudent, setSearchStudent] = useState('');
 
+  async function loadStudents() {
+    const response = await api.get('students');
+
+    setStudents(response.data);
+  }
+
   useEffect(() => {
-    async function loadStudents() {
-      const response = await api.get('students');
-
-      setStudents(response.data);
-    }
-
     loadStudents();
   }, []);
 
   function handleInputChange(e) {
     setSearchStudent(e.target.value);
-    console.tron.log(searchStudent);
   }
 
   async function handleDeleteStudent(id) {
@@ -33,20 +40,35 @@ export default function Students() {
     toast.success('Student deleted successfully');
   }
 
+  async function filterStudent() {
+    const response = await api.get(
+      searchStudent ? `students?name=${searchStudent}` : 'students'
+    );
+    setStudents(response.data);
+  }
+
   return (
     <Container>
       <Header>
         <strong>Manage Students</strong>
         <div>
-          <button type="button" onClick={() => history.push('/students/add')}>
+          <StandardButton
+            type="button"
+            onClick={() => history.push('/students/add')}
+          >
             <MdAdd size={20} />
             Add Student
-          </button>
-          <input
-            placeholder="Search student"
-            value={searchStudent}
-            onChange={handleInputChange}
-          />
+          </StandardButton>
+          <SearchBarDiv>
+            <SearchButton type="button" onClick={() => filterStudent()}>
+              <MdSearch size={20} />
+            </SearchButton>
+            <input
+              placeholder="Search student"
+              value={searchStudent}
+              onChange={handleInputChange}
+            />
+          </SearchBarDiv>
         </div>
       </Header>
       <StudentTable>
