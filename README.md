@@ -21,6 +21,9 @@ This client is implemented in  **ReactJS**, consumes the backend API available a
 - React date picker
 - React select (async select)
 
+##  demo
+![](gympoint-frontend-demo.gif)
+
 ## how to run
 
 - You need to have the backend API running in order to be able to use this client. Please refer to [gympoint-backend](https://github.com/jonathasgabriel/gympoint-backend) for further instructions

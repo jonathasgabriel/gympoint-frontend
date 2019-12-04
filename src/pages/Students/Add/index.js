@@ -54,7 +54,7 @@ export default function AddStudent(props) {
           height,
         });
 
-        toast.success('Student updated successfully');
+        toast.success('Member updated successfully');
       } else {
         await api.post('students', {
           name,
@@ -64,7 +64,7 @@ export default function AddStudent(props) {
           height,
         });
 
-        toast.success('Student registered successfully');
+        toast.success('Member registered successfully');
       }
 
       history.push('/students');
@@ -78,7 +78,7 @@ export default function AddStudent(props) {
   return (
     <Container>
       <Header>
-        <strong>{editMode ? 'Edit Student' : 'Register Student'}</strong>
+        <strong>{editMode ? 'Edit Member' : 'Register Member'}</strong>
         <div>
           <BackButton redirectPage="/students" />
           <SaveButton formSubmit="student-form" />
