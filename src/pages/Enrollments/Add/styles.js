@@ -18,14 +18,6 @@ export const Container = styled.div`
     border-radius: 4px;
     background: #fff;
 
-    > input {
-      margin: 5px 40px;
-      border-radius: 4px;
-      border: solid 1px #dddddd;
-      height: 45px;
-      padding: 0 15px;
-    }
-
     > strong {
       margin: 25px 40px 0;
       width: 118px;
@@ -39,7 +31,9 @@ export const Container = styled.div`
 `;
 
 export const InfoWrapper = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  grid-gap: 5px;
   flex: 1;
   justify-content: space-around;
   margin: -5px 40px 25px;
