@@ -39,15 +39,13 @@ export const Header = styled.div`
 
 export const StudentTable = styled.table`
   width: 100%;
+  table-layout: fixed;
   background: #fff;
   border-radius: 4px;
 
   thead th {
-    width: 100%;
     text-align: left;
     padding: 12px;
-    width: 46px;
-    height: 19px;
     font-family: Roboto;
     font-size: 16px;
     color: #444444;
@@ -56,8 +54,6 @@ export const StudentTable = styled.table`
   tbody td {
     padding: 12px;
     border-bottom: 1px solid #eee;
-    width: 79px;
-    height: 20px;
     font-family: Roboto;
     font-size: 16px;
     color: #666666;
@@ -66,10 +62,6 @@ export const StudentTable = styled.table`
   strong {
     color: #333;
     display: block;
-  }
-
-  div {
-    display: flex;
   }
 `;
 
