@@ -162,7 +162,7 @@ export default function AddEnrollment(props) {
       </Header>
 
       <Form id="enrollment-form" onSubmit={handleSubmit}>
-        <strong>Student</strong>
+        <strong>Member</strong>
         <CustomAsyncSelect
           cacheOptions
           isClearable

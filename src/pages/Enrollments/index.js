@@ -56,7 +56,7 @@ export default function Enrollments() {
       <StudentTable>
         <thead>
           <tr>
-            <th>Student</th>
+            <th>Member</th>
             <th>Plan</th>
             <th>Start Date</th>
             <th>End Date</th>

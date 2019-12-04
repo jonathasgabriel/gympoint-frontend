@@ -1,11 +1,11 @@
 # gympoint-frontend
-A complete Gym management application that enables registered customers to check in the gym and submit help orders through a react-native mobile App. Gym administrators have a reactjs web application for managing customers, enrollments, plans, and help orders.
+A complete Gym management application that enables registered members to check in the gym and submit help orders through a react-native mobile App. Gym administrators have a reactjs web application for managing members, enrollments, plans, and help orders.
 
-This client is implemented in  **ReactJS**, consumes the backend API available at [gympoint-backend](https://github.com/jonathasgabriel/gympoint-backend) and is used by gym administrators only. The react-native mobile application is used by customers and is available at [gympoint-mobile](https://github.com/jonathasgabriel/gympoint-mobile).
+This client is implemented in  **ReactJS**, consumes the backend API available at [gympoint-backend](https://github.com/jonathasgabriel/gympoint-backend) and is used by gym administrators only. The react-native mobile application is used by members and is available at [gympoint-mobile](https://github.com/jonathasgabriel/gympoint-mobile).
 
 ## features
 - User login
-- Customer creation/edition/deletion
+- Member creation/edition/deletion
 - Plan creation/edition/deletion
 - Enrollment creation/edition/deletion
 - Help order answer

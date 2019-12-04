@@ -76,7 +76,7 @@ export default function HelpOrders() {
       <HelpOrderTable>
         <thead>
           <tr>
-            <th>Student</th>
+            <th>Member</th>
             <th />
           </tr>
         </thead>

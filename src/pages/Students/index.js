@@ -50,21 +50,21 @@ export default function Students() {
   return (
     <Container>
       <Header>
-        <strong>Manage Students</strong>
+        <strong>Manage Members</strong>
         <div>
           <StandardButton
             type="button"
             onClick={() => history.push('/students/add')}
           >
             <MdAdd size={20} />
-            Add Student
+            Add member
           </StandardButton>
           <SearchBarDiv>
             <SearchButton type="button" onClick={() => filterStudent()}>
               <MdSearch size={20} />
             </SearchButton>
             <input
-              placeholder="Search student"
+              placeholder="Search member"
               value={searchStudent}
               onChange={handleInputChange}
             />
