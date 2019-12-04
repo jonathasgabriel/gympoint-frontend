@@ -94,22 +94,15 @@ export const CustomAsyncSelect = styled(AsyncSelect)`
   margin: 5px 40px;
 
   #react-select-2-input {
-    margin: 15px 15px 15px 15px;
+    margin-left: 5px;
   }
 
-  div {
-    align-items: center;
+  .css-1hwfws3 {
+    height: 45px;
+  }
 
-    div {
-      margin-left: 3px;
-      div {
-        margin-top: 13px;
-      }
-    }
-
-    span {
-      margin-bottom: 10px;
-    }
+  .css-1wa3eu0-placeholder {
+    margin-left: 5px;
   }
 `;
 
